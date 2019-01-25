@@ -41,7 +41,7 @@ python main.py --class1 data_class1.mat --class2 data_class2.mat --nSessions 2 [
 The following script detects the outliers in both the classes. It reports the outliers identified by Local Outlier Factor and Isolation Forest methods.
 
 ```
-python detect_outliers.py --class1 data_class1.mat --class2 data_class2.mat [--field_name data]
+python utils/detect_outliers.py --class1 data_class1.mat --class2 data_class2.mat [--field_name data]
 
     --class1     - a .mat file containing the data of class1
     --class2     - a .mat file containing the data of class2
@@ -50,4 +50,4 @@ python detect_outliers.py --class1 data_class1.mat --class2 data_class2.mat [--f
 ```
 ** Note: The field name of the data in the dictionary of .mat file should match the (string) value of `field_name`.
 
-## Reference
+## References
