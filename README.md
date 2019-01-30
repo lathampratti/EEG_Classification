@@ -1,6 +1,15 @@
 # EEG_Classification
 Age-related classification of EEG sessions.
 
+This repository provides the code for our work on "[Characterization of young and old adult brains: An EEG functional connectivity analysis](https://www.biorxiv.org/content/10.1101/495564v1)". 
+
+## Introduction
+The aim was to investigate whether EEG data can be used to distinguish the individual functional networks of young and old adults. And, to identify the functional connections that contribute to this classification. 
+
+We used different machine learning classification methods to perform this classification. We identified that functional connectivity decreases with older age in alpha, theta and gamma bands and, increases with age in beta band.
+A set of electrodes and the electrode-to-electrode distances that are involved in these connections (which increase or decrease with older age) are listed in the [paper](https://www.biorxiv.org/content/10.1101/495564v1).
+
+## Code
 The most significant features of the EEG sessions are identified using two-sample (Student's) t-test. These significant features are used to train different classifiers to distinguish the EEG session as belonging to younger or older adult groups.
 
 This repository has code to perform two-sample t-test and, to train the following classification methods: 
@@ -13,7 +22,7 @@ For each of these methods, the accuracy, confusion matrix and area under (ROC) c
 
 Also, a script is available to detect outliers in a class.
  
-## Dependencies
+### Dependencies
 
 Programming Language: Python 3.6
 
@@ -23,7 +32,7 @@ To be able to run this code, the following modules need to be installed:
 * scikit-learn
 * sklearn-extensions (https://pypi.org/project/sklearn-extensions/)
 
-## How to run the code?
+### How to run?
 
 The main script identifies the most significant features, performs different classification methods on the data and reports the accuracy, confusion matrix and area under (ROC) curve (AUC) scores for each classifier.
 
