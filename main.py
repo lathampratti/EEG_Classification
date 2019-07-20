@@ -53,15 +53,15 @@ if __name__ == '__main__':
     
     # Perform K-nearest neighbours classifier
     perform_kNearestNeighbours(Xn_t, yn, nSess)
-
-    # Perform the ELM classification with 'lin' (linear) kernel
-    perform_elm(Xn_t, yn, nSess, 'softlim')
     
-    # Perform the ELM classification with 'sigm' (sigmoid) kernel
+    # Perform the ELM classification with 'sigmoid' kernel
     perform_elm(Xn_t, yn, nSess, 'sigmoid')
 
-    # Perform the ELM classification with 'rbf_l2' (rbf) kernel
+    # Perform the ELM classification with 'gaussian' rbf kernel
     perform_elm(Xn_t, yn, nSess, 'gaussian')
+
+    # Perform the ELM classification with 'multiquadratic' rbf kernel
+    perform_elm(Xn_t, yn, nSess, 'multiquadric')
     
     # Perform the SVM classification with 'linear' kernel
     perform_svm(Xn_t, yn, nSess, 'linear')

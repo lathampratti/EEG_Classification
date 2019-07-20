@@ -59,8 +59,9 @@ def identify_top_features(Xn, yn, nSess=1):
                 top_features_pval[iter] = pval_a[i][i1]
                 iter += 1
                 break
-
-    return top_features, top_features_tscores, top_features_pval
+    # Sort the features based on the ttest value
+    sorted_idx = np.argsort(np.abs(top_features_tscores))[::-1]
+    return top_features[sorted_idx], top_features_tscores[sorted_idx], top_features_pval[sorted_idx]
 
 
 # A subject's data has to be left out during cross validation.
@@ -75,42 +76,37 @@ def get_groups(Xn, nSess=1):
     return groups 
 
 # Displays the count of the top features corresponding to alpha, beta,
-# gamma and, theta bands
+# gamma, theta and, delta bands
 def display_top_features_count(top_features):
     nalpha = len(top_features[top_features < 1596])
     nbeta = len(top_features[top_features < 3192]) - nalpha
     ngamma = len(top_features[top_features < 4788]) - (nalpha + nbeta)
-    ntheta = len(top_features[top_features >= 4788])
+    ntheta = len(top_features[top_features < 6384]) - (nalpha + nbeta + ngamma)
+    ndelta = len(top_features[top_features >= 6384])
     print("  Significant features:")
     print("    alpha band = %4d" % nalpha)
     print("     beta band = %4d" % nbeta)
     print("    gamma band = %4d" % ngamma)
     print("    theta band = %4d" % ntheta)
+    print("    delta band = %4d" % ndelta)
     print("         Total = %4d" % len(top_features))
 
 # Get the ttest scores between two samples
 #     input: 
 #        x1 - sample1
 #        x2 - sample2
-#         t_threshold - threshold to choose the significant features 
+#        t_threshold - t-score threshold to choose the significant features
+#        p_threshold - p-value threshold to choose the significant features
 #     ouput:
 #        top_features - indices of the features that are signifcant
 #        tscores - t-test scores of the signifcant features
 #        pvals - p-values corresponding to the t-test scores
-def get_ttest_scores(x1, x2, t_threshold=3):
+def get_ttest_scores(x1, x2, t_threshold=3, p_threshold=0.005):
     tscore, pval = stats.ttest_ind(x1, x2)
-    tscore_abs = np.abs(tscore)
-    temp = np.sort(tscore_abs)
-    tscore_sort = temp[::-1]
-    temp = np.argsort(tscore_abs)
-    tscore_idx = temp[::-1]
-    pval_sort = pval[tscore_idx]
-    tscore_s = tscore[tscore_idx]
-    val_with_score_gt1 = len(tscore_sort[tscore_sort > t_threshold])
-    top_features = tscore_idx[0:val_with_score_gt1]
-    tscores = tscore_s[0:val_with_score_gt1]
-    pvals = pval_sort[0:val_with_score_gt1]
-    return top_features, tscores, pvals
+    features_t_thresh = np.argwhere(np.abs(tscore) > t_threshold)
+    features_p_thresh = np.argwhere(pval < p_threshold)
+    top_features = np.intersect1d(features_t_thresh, features_p_thresh)
+    return top_features, tscore[top_features], pval[top_features]
 
 # Prepare the data set
 # Samples from both the classes are placed alternatively
