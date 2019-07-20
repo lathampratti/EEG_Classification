@@ -54,7 +54,6 @@ python utils/detect_outliers.py --class1 data_class1.mat --class2 data_class2.ma
 
     --class1     - a .mat file containing the data of class1
     --class2     - a .mat file containing the data of class2
-    --nSessions  - number of sessions per subject
     --field_name - name of the field under which the data is available in the .mat file (optional)
 ```
 ** Note: The field name of the data in the dictionary of .mat file should match the (string) value of `field_name`.
