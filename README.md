@@ -1,13 +1,13 @@
 # EEG_Classification
 Age-related classification of EEG sessions.
 
-This repository provides the code for our work on "[Characterization of young and old adult brains: An EEG functional connectivity analysis](https://www.biorxiv.org/content/10.1101/495564v1)". 
+This repository provides the code for our work on "[Characterization of young and old adult brains: An EEG functional connectivity analysis](https://doi.org/10.1016/j.neuroscience.2019.08.038)". 
 
 ## Introduction
 The aim was to investigate whether EEG data can be used to distinguish the individual functional networks of young and old adults. And, to identify the functional connections that contribute to this classification. 
 
 We used different machine learning classification methods to perform this classification. We identified that functional connectivity decreases with older age in alpha, theta and gamma bands and, increases with age in beta band.
-A set of electrodes and the electrode-to-electrode distances that are involved in these connections (which increase or decrease with older age) are listed in the [paper](https://www.biorxiv.org/content/10.1101/495564v1).
+A set of electrodes and the electrode-to-electrode distances that are involved in these connections (which increase or decrease with older age) are listed in the [paper](https://doi.org/10.1016/j.neuroscience.2019.08.038).
 
 ## Code
 The most significant features of the EEG sessions are identified using two-sample (Student's) t-test. These significant features are used to train different classifiers to distinguish the EEG session as belonging to younger or older adult groups.
